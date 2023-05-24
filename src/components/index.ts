@@ -1,4 +1,9 @@
 export { Button } from "./Button";
-export { Sidebar } from "./Sidebar";
+export { IconHoverEffect } from "./IconHoverEffect";
+export { HeartButton } from "./HeartButton";
 export { NewTweetForm } from "./NewTweetForm";
 export { ProfileImage } from "./ProfileImage";
+export { RecentTweets } from "./RecentTweets";
+export { Sidebar } from "./Sidebar";
+export { TweetCard } from "./TweetCard";
+export { TweetsList } from "./TweetsList";

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { VscAccount } from "react-icons/vsc";
 
 interface Props {
   src: string | null;
@@ -9,7 +10,11 @@ export const ProfileImage: React.FC<Props> = ({ src, className = "" }) => {
     <div
       className={`relative h-12 w-12 overflow-hidden rounded-full ${className}`}
     >
-      {!src ? null : <Image src={src} alt="Profile" quality={100} fill />}
+      {!src ? (
+        <VscAccount className="h-full w-full" />
+      ) : (
+        <Image src={src} alt="Profile" quality={100} fill />
+      )}
     </div>
   );
 };
