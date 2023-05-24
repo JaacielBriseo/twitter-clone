@@ -1,12 +1,11 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import { IconHoverEffect } from "./";
 import { VscAccount, VscHome, VscSignIn, VscSignOut } from "react-icons/vsc";
+import { IconHoverEffect } from "./";
 
 export const Sidebar = () => {
   const session = useSession();
   const user = session.data?.user;
-  console.log({ user });
   return (
     <aside className="sticky top-0 px-2 py-2">
       <ul className="flex flex-col items-start gap-2 whitespace-nowrap">

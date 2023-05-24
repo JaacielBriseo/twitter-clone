@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { type ITweet } from "~/interfaces/tweet.interface";
+import { useToggleLike } from "~/hooks";
+import { dateTimeFormatter } from "~/utils";
 import { HeartButton, ProfileImage } from "./";
-import { dateTimeFormatter } from "~/utils/dateFormatter";
 
 export const TweetCard: React.FC<ITweet> = ({
   content,
@@ -11,6 +12,12 @@ export const TweetCard: React.FC<ITweet> = ({
   likedByMe,
   user,
 }) => {
+  const { isLoading, toggleLike } = useToggleLike(id);
+
+  const handleToggleLike = () => {
+    toggleLike.mutate({ id });
+  };
+
   return (
     <li className="flex gap-4 border-b px-4 py-4">
       <Link href={`/profiles/${user.id}`}>
@@ -30,7 +37,12 @@ export const TweetCard: React.FC<ITweet> = ({
           </span>
         </div>
         <p className="whitespace-pre-wrap">{content}</p>
-        <HeartButton likedByMe={likedByMe} likeCount={likeCount} />
+        <HeartButton
+          likedByMe={likedByMe}
+          likeCount={likeCount}
+          onClick={handleToggleLike}
+          isLoading={isLoading}
+        />
       </div>
     </li>
   );

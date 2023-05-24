@@ -5,8 +5,15 @@ import { IconHoverEffect } from "./";
 interface Props {
   likedByMe: boolean;
   likeCount: number;
+  isLoading: boolean;
+  onClick: () => void;
 }
-export const HeartButton: React.FC<Props> = ({ likedByMe, likeCount }) => {
+export const HeartButton: React.FC<Props> = ({
+  likedByMe,
+  likeCount,
+  isLoading,
+  onClick,
+}) => {
   const session = useSession();
 
   const HeartIcon = likedByMe ? VscHeartFilled : VscHeart;
@@ -21,7 +28,9 @@ export const HeartButton: React.FC<Props> = ({ likedByMe, likeCount }) => {
   }
   return (
     <button
-      className={`group flex items-center gap-1 self-start transition-colors duration-200 -ml-2 ${
+      disabled={isLoading}
+      onClick={onClick}
+      className={`group -ml-2 flex items-center gap-1 self-start transition-colors duration-200 ${
         likedByMe
           ? "text-red-500"
           : "text-gray-500 hover:text-red-500 focus-visible:text-red-500"
