@@ -1,9 +1,13 @@
 import { api } from "~/utils/api";
 import { TweetsList } from "./";
 
-export const RecentTweets = () => {
+interface Props {
+  onlyFollowing?:boolean
+}
+
+export const RecentTweets:React.FC<Props> = ({onlyFollowing = false}) => {
   const tweets = api.tweet.infiniteFeed.useInfiniteQuery(
-    {},
+    {onlyFollowing},
     { getNextPageParam: ({ nextCursor }) => nextCursor }
   );
   return (

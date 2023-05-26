@@ -1,6 +1,6 @@
 import InfiniteScroll from "react-infinite-scroll-component";
 import { type ITweet } from "~/interfaces/tweet.interface";
-import { TweetCard } from "./";
+import { LoadingSpinner, TweetCard } from "./";
 
 interface Props {
   isLoading: boolean;
@@ -17,7 +17,7 @@ export const TweetsList: React.FC<Props> = ({
   isLoading,
   tweets,
 }) => {
-  if (isLoading) return <h1>Loading...</h1>;
+  if (isLoading) return <LoadingSpinner />;
   if (isError) return <h1>Error...</h1>;
   if (!tweets || tweets.length === 0) {
     return (
@@ -31,7 +31,7 @@ export const TweetsList: React.FC<Props> = ({
         dataLength={tweets.length}
         next={fetchNewTweets}
         hasMore={hasMore}
-        loader={"Loading...."}
+        loader={<LoadingSpinner />}
       >
         {tweets.map((tweet) => (
           <TweetCard key={tweet.id} {...tweet} />

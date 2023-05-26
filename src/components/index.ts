@@ -1,6 +1,7 @@
 export { Button } from "./Button";
-export { IconHoverEffect } from "./IconHoverEffect";
 export { HeartButton } from "./HeartButton";
+export { IconHoverEffect } from "./IconHoverEffect";
+export { LoadingSpinner } from "./LoadingSpinner";
 export { NewTweetForm } from "./NewTweetForm";
 export { ProfileImage } from "./ProfileImage";
 export { RecentTweets } from "./RecentTweets";
