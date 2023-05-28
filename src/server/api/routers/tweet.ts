@@ -11,9 +11,11 @@ export const tweetRouter = createTRPCRouter({
   create: protectedProcedure
     .input(z.object({ text: z.string() }))
     .mutation(async ({ input: { text }, ctx }) => {
-      return await ctx.prisma.tweet.create({
+      const tweets = await ctx.prisma.tweet.create({
         data: { content: text, userId: ctx.session.user.id },
       });
+      void ctx.revalidateSSG?.(`/profiles/${ctx.session.user.id}`);
+      return tweets;
     }),
   infiniteFeed: publicProcedure
     .input(
@@ -55,5 +57,23 @@ export const tweetRouter = createTRPCRouter({
         await ctx.prisma.like.delete({ where: { userId_tweetId: data } });
         return { addedLike: false };
       }
+    }),
+  infiniteProfileFeed: publicProcedure
+    .input(
+      z.object({
+        userId: z.string(),
+        limit: z.number().optional(),
+        cursor: z.object({ id: z.string(), createdAt: z.date() }).optional(),
+      })
+    )
+    .query(async ({ input: { limit = 10, cursor, userId }, ctx }) => {
+      return await getInfiniteTweets({
+        limit,
+        ctx,
+        cursor,
+        whereClause: {
+          userId,
+        },
+      });
     }),
 });

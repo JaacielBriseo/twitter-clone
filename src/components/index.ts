@@ -1,4 +1,5 @@
 export { Button } from "./Button";
+export { FollowButton } from "./FollowButton";
 export { HeartButton } from "./HeartButton";
 export { IconHoverEffect } from "./IconHoverEffect";
 export { LoadingSpinner } from "./LoadingSpinner";

@@ -12,7 +12,7 @@ export const TweetCard: React.FC<ITweet> = ({
   likedByMe,
   user,
 }) => {
-  const { isLoading, toggleLike } = useToggleLike(id);
+  const { isLoading, toggleLike } = useToggleLike(id, user.id);
 
   const handleToggleLike = () => {
     toggleLike.mutate({ id });

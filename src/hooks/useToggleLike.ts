@@ -1,6 +1,6 @@
 import { api } from "~/utils";
 
-export const useToggleLike = (id: string) => {
+export const useToggleLike = (id: string,userId:string) => {
   const trpcUtils = api.useContext();
 
   const toggleLike = api.tweet.toggleLike.useMutation({
@@ -31,6 +31,14 @@ export const useToggleLike = (id: string) => {
         };
       };
       trpcUtils.tweet.infiniteFeed.setInfiniteData({}, updateData);
+      trpcUtils.tweet.infiniteFeed.setInfiniteData(
+        { onlyFollowing: true },
+        updateData
+      );
+      trpcUtils.tweet.infiniteProfileFeed.setInfiniteData(
+        { userId },
+        updateData
+      );
     },
   });
 
